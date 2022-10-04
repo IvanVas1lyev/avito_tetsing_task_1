@@ -33,8 +33,15 @@ def encode(message: str) -> str:
     >>> encode('SOS')
     '... ---
     ...'
-    >>> encode('89')
-    '---.. ----.'
+    >>> encode('SOS') # doctest: +NORMALIZE_WHITESPACE
+    '... ---
+    ...'
+    >>> encode('Ъ')
+    Traceback (most recent call last):
+    KeyError: 'Ъ'
+    >>> decode('......')  # doctest: +IGNORE_EXCEPTION_DETAIL
+    Traceback (most recent call last):
+    KeyError: 'ЪЪЪЪЪЪЪ'
     """
     encoded_signs = [
         LETTER_TO_MORSE[letter] for letter in message
@@ -46,19 +53,6 @@ def encode(message: str) -> str:
 def decode(morse_message: str) -> str:
     """
     Декодирует строку из азбуки Морзе в английский
-
-    >>> decode('.... . .-.. .-.. --- --..-- ..-. .-. .. . -. -.. ... --..-- ..-. --- . ...')
-    'HELLO, FRIENDS, FOES'
-    >>> decode('.... . .-.. .-.. --- --..-- ..-. .-. .. . -. -.. ... --..-- ..-. --- . ...')  # doctest: +ELLIPSIS
-    'HELLO, ..., FOES'
-    >>> decode('.... . .-.. .-.. --- --..-- ..-. .-. .. . -. -.. ...')  # doctest: +NORMALIZE_WHITESPACE
-    'HELLO,    FRIENDS'
-    >>> decode('......')
-    Traceback (most recent call last):
-    KeyError: '......'
-    >>> decode('......')  # doctest: +IGNORE_EXCEPTION_DETAIL
-    Traceback (most recent call last):
-    KeyError: '..'
     """
     decoded_letters = [
         MORSE_TO_LETTER[letter] for letter in morse_message.split()
