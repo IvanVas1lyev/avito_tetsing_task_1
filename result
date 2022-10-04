@@ -1,89 +1,53 @@
 RUN WITHOUT FLAGS:  
-(venv) PS C:\Users\Ivan\PycharmProjects\testing1>  python -m doctest -v main.py
-Trying:                                                                                 
-    decode('.... . .-.. .-.. --- --..-- ..-. .-. .. . -. -.. ... --..-- ..-. --- . ...')
-Expecting:                                                                              
-    'HELLO, FRIENDS, FOES'                                                              
-ok                                                                                                            
-Trying:                                                                                                       
-    decode('.... . .-.. .-.. --- --..-- ..-. .-. .. . -. -.. ... --..-- ..-. --- . ...')  # doctest: +ELLIPSIS
-Expecting:
-    'HELLO, ..., FOES'
-ok
-Trying:
-    decode('.... . .-.. .-.. --- --..-- ..-. .-. .. . -. -.. ...')  # doctest: +NORMALIZE_WHITESPACE
-Expecting:
-    'HELLO,    FRIENDS'
-ok
-Trying:
-    decode('......')
-Expecting:
-    Traceback (most recent call last):
-    KeyError: '......'
-ok
-Trying:
-    decode('......')  # doctest: +IGNORE_EXCEPTION_DETAIL
-Expecting:
-    Traceback (most recent call last):
-    KeyError: '..'
-ok
-Trying:
+(venv) PS C:\Users\Ivan\PycharmProjects\testing1>  python -m doctest -v main.py                        
+Trying:          
     encode('SOS')
-Expecting:
+Expecting:       
     '... --- ...'
-ok
-Trying:
+ok                                                                            
+Trying:                                                                       
+    encode('SOS')                                                             
+Expecting:                                                                    
+    '... ---                                                                  
+    ...'                                                                      
+**********************************************************************        
+File "C:\Users\Ivan\PycharmProjects\testing1\main.py", line 33, in main.encode
+Failed example:
     encode('SOS')
-Expecting:
+Expected:
     '... ---
-    ...'
     ...'
 Got:
     '... --- ...'
 Trying:
-    encode('89')
+    encode('SOS') # doctest: +NORMALIZE_WHITESPACE
 Expecting:
-    '---.. ----.'
-ok
-1 items had no tests:
-    main
-1 items passed all tests:
-   5 tests in main.decode
-**********************************************************************
-1 items had failures:
-   1 of   3 in main.encode
-8 tests in 3 items.
-7 passed and 1 failed.
-***Test Failed*** 1 failures.
-RUN WITH FLAG:  
-(venv) PS C:\Users\Ivan\PycharmProjects\testing1>  python -m doctest -o NORMALIZE_WHITESPACE -v main.py
-Trying:                                                                                 
-    decode('.... . .-.. .-.. --- --..-- ..-. .-. .. . -. -.. ... --..-- ..-. --- . ...')
-Expecting:                                                                              
-    'HELLO, FRIENDS, FOES'                                                              
-ok     
-Trying:
-    decode('.... . .-.. .-.. --- --..-- ..-. .-. .. . -. -.. ... --..-- ..-. --- . ...')  # doctest: +ELLIPSIS
-Expecting:
-    'HELLO, ..., FOES'
+    '... ---
+    ...'
 ok
 Trying:
-    decode('.... . .-.. .-.. --- --..-- ..-. .-. .. . -. -.. ...')  # doctest: +NORMALIZE_WHITESPACE
-Expecting:
-    'HELLO,    FRIENDS'
-ok
-Trying:
-    decode('......')
+    encode('Ъ')
 Expecting:
     Traceback (most recent call last):
-    KeyError: '......'
+    KeyError: 'Ъ'
 ok
 Trying:
     decode('......')  # doctest: +IGNORE_EXCEPTION_DETAIL
 Expecting:
     Traceback (most recent call last):
-    KeyError: '..'
+    KeyError: 'ЪЪЪЪЪЪЪ'
 ok
+2 items had no tests:
+    main
+    main.decode
+**********************************************************************
+1 items had failures:
+   1 of   5 in main.encode
+5 tests in 3 items.
+4 passed and 1 failed.
+***Test Failed*** 1 failures.
+RUN WITH FLAG:
+(venv) PS C:\Users\Ivan\PycharmProjects\testing1>  python -m doctest -o NORMALIZE_WHITESPACE -v main.py
 Trying:
     encode('SOS')
 Expecting:
@@ -96,16 +60,29 @@ Expecting:
     ...'
 ok
 Trying:
-    encode('89')
+    encode('SOS') # doctest: +NORMALIZE_WHITESPACE
 Expecting:
-    '---.. ----.'
+    '... ---
+    ...'
 ok
-1 items had no tests:
+Trying:
+    encode('Ъ')
+Expecting:
+    Traceback (most recent call last):
+    KeyError: 'Ъ'
+ok
+Trying:
+    decode('......')  # doctest: +IGNORE_EXCEPTION_DETAIL
+Expecting:
+    Traceback (most recent call last):
+    KeyError: 'ЪЪЪЪЪЪЪ'
+ok
+2 items had no tests:
     main
-2 items passed all tests:
-   5 tests in main.decode
-   3 tests in main.encode
-8 tests in 3 items.
-8 passed and 0 failed.
+    main.decode
+1 items passed all tests:
+   5 tests in main.encode
+5 tests in 3 items.
+5 passed and 0 failed.
 Test passed.
-
+(venv) PS C:\Users\Ivan\PycharmProjects\testing1> 
